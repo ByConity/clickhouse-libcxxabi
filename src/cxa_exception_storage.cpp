@@ -72,7 +72,7 @@ namespace {
 }
 
 extern "C" {
-    __cxa_eh_globals * __cxa_get_globals () {
+    __cxa_eh_globals * __cxa_get_globals () __attribute__((weak)) {
     //  Try to get the globals for this thread
         __cxa_eh_globals* retVal = __cxa_get_globals_fast ();
 
@@ -92,7 +92,7 @@ extern "C" {
     // preceded by a call to __cxa_get_globals().  This is an extension
     // to the Itanium ABI and is taken advantage of in several places in
     // libc++abi.
-    __cxa_eh_globals * __cxa_get_globals_fast () {
+    __cxa_eh_globals * __cxa_get_globals_fast () __attribute__((weak)) {
     //  First time through, create the key.
         if (0 != std::__libcpp_execute_once(&flag_, construct_))
             abort_message("execute once failure in __cxa_get_globals_fast()");
